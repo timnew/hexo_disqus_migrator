@@ -1,3 +1,3 @@
-module Migrator
-  VERSION = "0.0.1"
+class Migrator
+  VERSION = '0.0.2'
 end

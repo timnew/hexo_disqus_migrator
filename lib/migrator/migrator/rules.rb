@@ -1,5 +1,37 @@
 class Migrator
   module Rules
+    VERIFIER = Rule.new(:valid_checker, false) do
+      setup_match { |m| m.isnt?(:ignored) }
+      setup_action do |m|
+        local_file = Migrator.local_path m.new_path
+
+        if local_file.exist?
+          m.tags << :valid
+        else
+          m.tags << :invalid
+          m.output = false
+        end
+      end
+    end
+
+    FIX_CHECKER = Rule.new(:fix_checker, false) do
+      setup_match { |m| m.is?(:broken) }
+      setup_match { |m| m.isnt?(:fixed) }
+      setup_match { |m| Migrator.local_path(m.new_path).exist? }
+      setup_action do |m|
+        m.tags << :fixed
+        true
+      end
+    end
+
+    def verifier
+      VERIFIER
+    end
+
+    def fix_checker
+      FIX_CHECKER
+    end
+
     RULES = []
 
     def rules
@@ -53,7 +85,7 @@ class Migrator
       setup_action do |m|
         m.new_path = m.new_path.gsub(/^\/[^\/]+\//, '/blog/')
         m.output = true
-        FIX_CHECKER.apply(m)
+        Migrator.fix_checker.apply(m)
       end
     end
 
@@ -66,7 +98,7 @@ class Migrator
       setup_action do |m|
         m.new_path = m.new_path.sub(/\/\d\d\d\d-\d\d-\d\d-/, '/')
         m.output = true
-        FIX_CHECKER.apply(m)
+        Migrator.fix_checker.apply(m)
       end
     end
 
@@ -85,7 +117,7 @@ class Migrator
 
           m.output = true
           m.new_path = File.join('/', 'public', 'timestamp_path', m.basename.to_s)
-          FIX_CHECKER.apply(m)
+          Migrator.fix_checker.apply(m)
         end
       end
     end
@@ -103,7 +135,7 @@ class Migrator
         m.new_path = Migrator.to_url m.local_path.parent.children.first.to_s
         m.confident = false
         m.output = true
-        FIX_CHECKER.apply(m)
+        Migrator.fix_checker.apply(m)
       end
     end
 
@@ -132,7 +164,7 @@ class Migrator
 
         m.confident = false
         m.output = true
-        FIX_CHECKER.apply(m)
+        Migrator.fix_checker.apply(m)
       end
     end
 

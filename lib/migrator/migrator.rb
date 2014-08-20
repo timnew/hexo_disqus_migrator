@@ -1,7 +1,7 @@
-require 'migrator/rules'
-require 'migrator/class_methods'
-require 'migrator/reports'
-require 'migrator/outputs'
+require_relative 'migrator/rules'
+require_relative  'migrator/class_methods'
+require_relative  'migrator/reports'
+require_relative  'migrator/outputs'
 
 class Migrator
   extend Rules
