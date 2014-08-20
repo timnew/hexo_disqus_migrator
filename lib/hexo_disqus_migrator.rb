@@ -1,5 +1,10 @@
-require 'hexo_disqus_migrator/version'
+require 'migrator/version'
 
-module Migrator
-  # Your code goes here...
-end
+require 'CSV'
+require 'uri'
+require 'terminal-table'
+require 'commander'
+
+require 'migrator/rule'
+require 'migrator/mapping'
+require 'migrator/migrator'
