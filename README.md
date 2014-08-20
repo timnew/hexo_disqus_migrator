@@ -1,7 +1,7 @@
 hexo_disqus_migrator [![Gem version][gem-image]][gem-url] [![Dependency Status][depstat-image]][depstat-url]
 ===============
 
-> [hexo_disqus_migrator] is a tool that help you generate [Disqus Url Mapper] for your [Hexo] or [Octopress] blog
+> [hexo_disqus_migrator] is a tool that help blogger to generate [Disqus Url Mapper] for your [Hexo] or [Octopress] blog
 
 ## Installation
 

@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Migrator::VERSION
   spec.authors       = ['TimNew']
   spec.email         = ['timnew.wti@gmail.com']
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{hexo_disqus_migrator is a tool that help blogger to generate Disqus Url Mapper for your Hexo or Octopress blog}
+  spec.summary       = spec.description
   spec.homepage      = ""
   spec.license       = 'MIT'
 
